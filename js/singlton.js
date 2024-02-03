@@ -31,8 +31,3 @@ const groupBy = function (groupParam) {
 };
 
 Array.prototype.groupBy = groupBy;
-const url = "https://jsonplaceholder.typicode.com/posts";
-
-const data = new Singleton(url);
-
-console.log(data.getData());
