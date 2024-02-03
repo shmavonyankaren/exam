@@ -5,33 +5,13 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
 const data = [];
-
-app.get("/", (req, res) => {
-  try {
-    const filePath = "data.json";
-    const rawData = fs.readFileSync(filePath);
-    const objData = JSON.parse(rawData);
-    res.send(objData);
-  } catch {
-    res.status(500).send("Something went wrong!!");
-  }
-});
-
 app.post("/", (req, res) => {
   try {
     const newDate = req.body;
-    const jsonData = JSON.stringify(newDate);
-    const filePath = "data.json";
-    fs.writeFile(filePath, jsonData, (err) => {
-      if (err) {
-        console.error("Error writing to file:", err);
-      } else {
-        console.log("Object has been stored in the file:", filePath);
-      }
-    });
+    data.push(newDate);
     console.log(newDate);
+    console.log(data);
     res.status(201).json(newDate);
   } catch {
     res.status(500).send("something went wrong!!");
