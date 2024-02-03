@@ -11,7 +11,12 @@ export default function Modal() {
   return (
     <div className="button-container">
       <h1>Order food with one click</h1>
-      <Button size="medium" variant="outlined" onClick={handleOpen}>
+      <Button
+        color="info"
+        size="medium"
+        variant="contained"
+        onClick={handleOpen}
+      >
         Open
       </Button>
       <Form handleClose={handleClose} show={show} />

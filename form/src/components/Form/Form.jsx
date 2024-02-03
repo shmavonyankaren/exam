@@ -38,10 +38,8 @@ export default function Form({ handleClose, show }) {
           />
           {formik.touched.text && formik.errors.text ? (
             <p className="error">{formik.errors.text}</p>
-          ) : (
-            ""
-          )}
-          <p>How'd you like us to predare?</p>
+          ) : null}
+          <p>How'd you like us to prepare?</p>
           <textarea
             id="textarea"
             rows="4"
@@ -52,19 +50,16 @@ export default function Form({ handleClose, show }) {
           ></textarea>
           {formik.touched.text && formik.errors.text ? (
             <p className="error">{formik.errors.text}</p>
-          ) : (
-            ""
-          )}
+          ) : null}
           <div className="select-div">
             <p>Select Food</p>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 80 }}>
               <Select
                 id="selectInput"
+                name="selectInput"
                 required={true}
-                labelId={formik.values.selectInput}
                 value={formik.values.selectInput}
                 onChange={formik.handleChange}
-                label={formik.values.selectInput}
               >
                 {arrayOfOptions?.map((option) => (
                   <MenuItem id={option} key={option} value={option}>
@@ -75,7 +70,7 @@ export default function Form({ handleClose, show }) {
             </FormControl>
           </div>
 
-          <Button variant="outlined" type="submit">
+          <Button variant="contained" type="submit">
             Order{" "}
           </Button>
         </form>
