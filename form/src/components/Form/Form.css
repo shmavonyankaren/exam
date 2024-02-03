@@ -11,3 +11,13 @@
   border-radius: 10px;
   padding-block: 30px;
 }
+
+.select-div {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}

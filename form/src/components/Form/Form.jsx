@@ -1,23 +1,33 @@
-import { Input, Modal } from "@mui/material";
+import { FormControl, Input, Modal } from "@mui/material";
 import React from "react";
 import "./Form.css";
 import { useFormik } from "formik";
 import handlerSubmit from "../../handlers/handlerSubmit";
 import validation from "../../utils/valitation";
 import { Button } from "@mui/material";
+import { Select, MenuItem } from "@mui/material";
+
 export default function Form({ handleClose, show }) {
   const formik = useFormik({
     initialValues: {
       text: "",
       textarea: "",
+      selectInput: "",
     },
     validationSchema: validation(),
     onSubmit: handlerSubmit,
   });
+  let arrayOfOptions = ["Pizza", "Tacco", "Burger"];
   return (
     <div>
       <Modal open={show} onClose={handleClose}>
-        <form onSubmit={formik.handleSubmit} className="form-container">
+        <form
+          id="form"
+          onSubmit={formik.handleSubmit}
+          className="form-container"
+        >
+          <p>Your Name</p>
+
           <Input
             className="input"
             id="text"
@@ -27,23 +37,47 @@ export default function Form({ handleClose, show }) {
             onChange={formik.handleChange}
           />
           {formik.touched.text && formik.errors.text ? (
-            <p>{formik.errors.text}</p>
-          ) : null}
+            <p className="error">{formik.errors.text}</p>
+          ) : (
+            ""
+          )}
+          <p>How'd you like us to predare?</p>
           <textarea
             id="textarea"
-            name="w3review"
             rows="4"
             cols="50"
             value={formik.values.textarea}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
           ></textarea>
-          <label>Favorite food</label>
-          <select name="cars" id="cars">
-            <option value="volvo">Pizza</option>
-            <option value="saab">Tacco</option>=
-            <option value="audi">Burger</option>
-          </select>
-          <Button type="submit">Send</Button>
+          {formik.touched.text && formik.errors.text ? (
+            <p className="error">{formik.errors.text}</p>
+          ) : (
+            ""
+          )}
+          <div className="select-div">
+            <p>Select Food</p>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 80 }}>
+              <Select
+                id="selectInput"
+                required={true}
+                labelId={formik.values.selectInput}
+                value={formik.values.selectInput}
+                onChange={formik.handleChange}
+                label={formik.values.selectInput}
+              >
+                {arrayOfOptions?.map((option) => (
+                  <MenuItem id={option} key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+
+          <Button variant="outlined" type="submit">
+            Order{" "}
+          </Button>
         </form>
       </Modal>
     </div>
